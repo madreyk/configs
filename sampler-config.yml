@@ -1,0 +1,44 @@
+gauges:
+  - title: ""
+    position: [[34, 15], [28, 3]]
+    triggers:
+      - title: CLOCK BELL EVERY MINUTE
+        condition: '[ $label == "cur" ] && [ $cur -eq 0 ] && echo 1 || echo 0'
+        actions:
+            terminal-bell: true
+            sound: false
+            visual: false
+            script: say -v samantha `date +%I:%M%p`
+    color: 1
+    cur:
+        sample: date +%S
+    max:
+        sample: echo 60
+    min:
+        sample: echo 0
+textboxes:
+  - title: System
+    position: [[65, 0], [40, 25]]
+    rate-ms: 1000
+    color: 1
+    sample: neofetch
+    border: false
+  - title: '       '
+    position: [[0, 0], [25, 20]]
+    rate-ms: 1000
+    color: 1
+    sample: lsblk
+    border: false
+  - title: ' '
+    position: [[0, 19], [14, 23]]
+    rate-ms: 1000
+    color: 1
+    sample: sh /home/madbook/.auto/ls.sh
+    border: false
+asciiboxes:
+  - title: '  '
+    position: [[34, 17], [28, 7]]
+    rate-ms: 1000
+    color: 1
+    sample: env TZ=UTC date +%r
+    border: false
