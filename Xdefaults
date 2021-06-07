@@ -1,0 +1,52 @@
+URxvt.scrollBar: false
+URxvt*font: xft:DejaVu Sans Mono:size=13
+URxvt.letterSpace: -1.9
+URxvt*saveLines:            200000
+! Background color
+! URxvt*background: #17191b
+!URxvt.background:   #002B33
+!URxvt.foreground:   #93A1A1
+
+! Цвет шрифта
+URxvt*foreground: white
+
+urxvt*depth: 32
+urxvt*background: rgba:0000/0000/0200/c800
+
+! Другие цвета
+URxvt*color0: black
+URxvt*color1: red3
+URxvt*color2: green3
+URxvt*color3: yellow3
+URxvt*color4: blue2
+URxvt*color5: #ff95bf
+URxvt*color6: cyan
+URxvt*color7: gray90
+URxvt*color8: grey50
+URxvt*color9: red
+URxvt*color10: green
+URxvt*color11: yellow
+URxvt*color12: #7ba8db
+URxvt*color13: #ff95bf
+URxvt*color14: cyan
+URxvt*color15: white
+
+URxvt.scrollWithBuffer: true
+URxvt.perl-ext-common: default,matcher,resize-font,clipboard
+URxvt.url-launcher: /usr/bin/xdg-open
+
+URxvt.keysym.M-c: perl:clipboard:copy
+URxvt.keysym.M-c: perl:clipboard:paste
+URxvt.matcher.button: 1
+URxvt.matcher.rend.0: Uline Bold fg5
+
+URxvt.keysym.C-Down:     resize-font:smaller
+URxvt.keysym.C-Up:      resize-font:bigger
+
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 1
+URxvt.secondaryWheel: 1
+
+
+URxvt.iso14755:        false
+URxvt.iso14755_52:     false
