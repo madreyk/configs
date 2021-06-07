@@ -1,0 +1,13 @@
+[Default Applications]
+x-scheme-handler/tg=userapp-Telegram Desktop-RAXC40.desktop
+text/html=chromium.desktop
+x-scheme-handler/http=chromium.desktop
+x-scheme-handler/https=chromium.desktop
+x-scheme-handler/about=chromium.desktop
+x-scheme-handler/unknown=chromium.desktop
+.sh=nvim.desktop
+.*=nvim.desktop
+.vimrc=nvim.desktop
+
+[Added Associations]
+x-scheme-handler/tg=userapp-Kotatogram Desktop-JBII40.desktop;userapp-Telegram Desktop-RAXC40.desktop;
