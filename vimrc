@@ -1,22 +1,24 @@
+imap <C-c> <ESC>y
+imap <C-z> <ESC>:undo<RETURN>
+imap <C-a> <C-n>
+map <C-c> y
+map <C-z> <ESC>:undo<RETURN>
+imap <C-h> <C-w>
+
+set backspace=indent,eol,start
+set clipboard=unnamedplus
+syntax on
+set expandtab
+set number
+set tabstop=4
+set mouse=a
+set ignorecase
+set smartcase
+set hlsearch
+set incsearch
+set encoding=utf-8
+set langmap=ФИСВУАПРШОЛДЬТЩЗЙКЫЕГМЦЧНЯ;ABCDEFGHIJKLMNOPQRSTUVWXYZ,фисвуапршолдьтщзйкыегмцчня;abcdefghijklmnopqrstuvwxyz
+
 call plug#begin()
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'brooth/far.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'fatih/vim-go'
-Plug 'mattn/emmet-vim'
-"Plug 'neoclide/coc.nvim'
-Plug 'terryma/vim-multiple-cursors'
-Plug 'tpope/vim-surround'
-Plug 'ycm-core/YouCompleteMe'
-Plug 'Shougo/neocomplcache.vim'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+
 call plug#end()
-set laststatus=1
-
-if has("autocmd")
-	autocmd FileType python set complete+=k/home/shakir/.vim/pydiction-0.5/pydiction isk+=.,(
-endif " has("autocmd"
-
-noremap q :q!
-noremap w :wq!
