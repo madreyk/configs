@@ -4,26 +4,25 @@
 # layout, use the i3-config-wizard
 # $mod = Win
 set $mod Mod4
-set $brow chromium
+set $brow qutebrowser
 set $term urxvt
-new_window pixel 0
+new_window pixel 1
 
 # FX
-bindsym $mod+t exec --no-startup-id $term
-bindsym $mod+e exec $term -e 'ranger'
-bindsym $mod+l exec betterlockscreen -l -t
+bindsym Print exec sh ~/.auto/sc.sh
+bindsym Ctrl+Print exec sh ~/.auto/sc1.sh
+bindsym KP_End exec betterlockscreen -l -t
+bindsym $mod+t exec $term
 
 # AutoStart
-exec --no-startup-id setxkbmap "us,rus" ",winkeys" "grp:alt_shift_toggle,grp_led:scroll"
-exec picom
-
+exec --no-startup-id nitrogen --restore
+exec --no-startup-id devmon
+exec --no-startup-id unclutter --idle 1 --ignore-scrolling
+exec --no-startup-id setxkbmap "uss,rus" "winkeys" "grp:alt_shift_toggle,grp_led:scroll"
+exec --no-startup-id polybar top
+exec --no-startup-id brightnessctl s 4882
 
 # Moving
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
-
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
@@ -34,16 +33,11 @@ bindsym $mod+Shift+p split h
 
 for_window [instance="dragon-drag-and-drop"] sticky toggle
 for_window [instance="mpv"] sticky toggle
-for_window [instance="pavucontrol"] move scratchpad
-for_window [instance="pavucontrol"] resize set 715 500
+for_window [instance="urxvt"] border pixel 1
+#for_window [instance="urxvt"] resize set 100 100
 
 # Windows
 bindsym $mod+q kill
-
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
 
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
@@ -52,25 +46,42 @@ bindsym $mod+Right focus right
 
 bindsym $mod+y floating toggle
 
-assign [class="^Chromium$"] → 1
+client.focused          #000000 #000000 #000000 #000000 #000000
+client.focused_inactive #000000 #000000 #000000 #000000 #000000
+client.unfocused        #000000 #000000 #000000 #000000 #000000
+client.urgent           #000000 #000000 #000000 #000000 #000000
+client.background       #000000
+
+assign [class="^qutebrowser$"] → 1
 assign [class="^URxvt$"] → 2
-assign [class="^Simplenote$"] → 3
-assign [class="^Subl$"] → 3
-assign [class="^KeePassXC$"] → 10
+assign [class="^TelegramDesktop$"] → 3
+assign [class="^discord$"] → 3
+assign [class="^tutanota-desktop$"] → 3
+
+# gaps [inner|outer|horizontal|vertical|top|left|bottom|right] <px>
+# gaps inner 7
+# smart_gaps on
+# smart_borders no_gaps
+# hide_edge_borders smart_no_gaps
 
 # Other
 font pango:monospace 12
-bindsym $mod+z exec --no-startup-id dmenu_run
+bindsym $mod+z exec --no-startup-id rofi -show run
 bindsym $mod+F11 fullscreen toggle
 floating_modifier $mod
 
 
 
 # Use pactl to adjust volume in PulseAudio.
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+#bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
+#bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
+#bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+#bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+
+bindsym	F10 exec pactl set-sink-mute 0 Muted
+bindsym F11 exec pactl set-sink-volume 0 -10%
+bindsym F12 exec pactl set-sink-volume 0 +10%
+
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
@@ -78,11 +89,9 @@ bindsym $mod+space focus mode_toggle
 
 # move the currently focused window to the scratchpad
 bindsym $mod+Shift+a move scratchpad
-
+bindsym $mod+a scratchpad show
 # Show the next scratchpad window or hide the focused scratchpad window.
 # If there are multiple scratchpad windows, this command cycles through them.
-bindsym $mod+a scratchpad show
-
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
@@ -124,48 +133,80 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+r restart
+
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 bindsym $mod+s mode "open"
 mode "open" {
-	bindsym Shift+q exec i3-msg exec sh ~/.auto/tr.sh; workspace 1; mode default
-	bindsym Shift+w exec i3-msg exec sh ~/.auto/mpv.sh; mode default
-	bindsym Shift+e exec i3-msg exec sh ./.auto/sx.sh; workspace 1; mode default
+	bindsym w exec i3-msg exec sh ~/.auto/tr.sh; workspace 1; mode default
+	bindsym e exec i3-msg exec sh ~/.auto/mpv.sh; mode default
+	bindsym q exec i3-msg exec sh ~/.auto/sx.sh; workspace 1; mode default
 
-	bindsym q exec i3-msg exec $brow; workspace 1; mode default
+	bindsym z exec i3-msg exec $brow youtube.com; workspace 1; mode default
+	bindsym x exec i3-msg exec $brow linux.org.ru; workspace 1; mode default
+	bindsym c exec i3-msg exec $brow github.com; workspace 1; mode default
 
+	bindsym 1 exec i3-msg exec $brow; workspace 1; mode default
+    bindsym 2 exec i3-msg workspace 2; mode add2
+    bindsym 3 exec i3-msg workspace 3; mode add3
+    bindsym 4 exec i3-msg workspace 4; mode add4
+    bindsym 0 exec i3-msg exec keepassxc; workspace 10; mode default
+
+    bindsym $mod+r restart
 	bindsym Escape mode "default"
-	bindsym Returc mode "default"
-	bindsym $mod+s mode "default"
-	bindsym $mod+r restart
 	}
+mode "add2" {
+    bindsym t exec $term
+    bindsym e exec $term -e vim ~
+    bindsym s exec $term -e sncli
+
+    bindsym $mod+r restart
+    bindsym Escape mode "default"
+}
+
+mode "add3" {
+    bindsym t mode add31
+    bindsym d exec discord; mode default
+    
+    bindsym $mod+r restart
+    bindsym Escape mode "default"
+    }
+mode "add31" {
+    bindsym e exec telegram-desktop; mode default
+    bindsym u exec tutanota-desktop; mode default
+
+    bindsym $mod+r restart
+    bindsym Escape mode "default"
+    }
+mode "add4" {
+    bindsym f exec freetube; mode "default"
+	bindsym m exec minecraft-launcher; mode "default"
+    bindsym Escape mode "default"
+    bindsym r "restart"
+    
+}
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+	bindsym Left        resize shrink width 5 px or 5 ppt
+	bindsym Down        resize grow height 5 px or 5 ppt
+	bindsym Up          resize shrink height 5 px or 5 ppt
+	bindsym Right       resize grow width 5 px or 5 ppt
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym $left       resize shrink width 10 px or 10 ppt
-        bindsym $down       resize grow height 10 px or 10 ppt
-        bindsym $up         resize shrink height 10 px or 10 ppt
-        bindsym $right      resize grow width 10 px or 10 ppt
-
-        # same bindings, but for the arrow keys
-        bindsym Left        resize shrink width 10 px or 10 ppt
-        bindsym Down        resize grow height 10 px or 10 ppt
-        bindsym Up          resize shrink height 10 px or 10 ppt
-        bindsym Right       resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+x mode "default"
+	# back to normal: Enter or Escape or $mod+r
+	# bindsym Return mode "default"
+	bindsym Escape mode "default"
+	# bindsym $mod+x mode "default"
+	# bindsym $mod+x mode "default"
+	# bindsym $mod+x mode "default"
 }
 
 bindsym $mod+x mode "resize"
+
+bindsym KP_Left        resize shrink width 5 px or 5 ppt
+bindsym KP_Down        resize grow height 5 px or 5 ppt
+bindsym KP_Up          resize shrink height 5 px or 5 ppt
+bindsym KP_Right       resize grow width 5 px or 5 ppt
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available
@@ -191,8 +232,7 @@ bindsym $mod+x mode "resize"
 # ~/.i3/config.
 #
 # Please remove the following exec line:
-#######################################################################
-exec --no-startup-id i3-config-wizard
+###############################################################
 
 
 
