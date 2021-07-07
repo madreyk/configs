@@ -1,0 +1,123 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+[bar/top]
+monitor = LVDS-1
+width = 100%
+height = 24
+radius = 0
+fixed-center = true
+# border-size = 7
+
+background = #002b36
+foreground = #839496
+
+
+padding-left = 0
+padding-right = 4
+
+module-margin-left = 0
+module-margin-right = 4
+
+font-0 = fixed:pixelsize=10;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=10;1
+
+
+modules-right = wlan keyboard volume filesystem battery date
+modules-center = formating
+modules-left =
+
+# tray-detached = false
+# tray-position = left
+# tray-offset-x = 0
+# tray-offset-y = 0
+# tray-maxsize = 16
+# tray-padding = 0
+# tray-scale = 1
+
+[module/date]
+type = internal/date
+interval = 500
+date = %Y.%m.%d%
+label = %date%
+label-font = 3
+
+[module/battery]
+type = internal/battery
+; Use the following command to list batteries and adapters:
+; $ ls -1 /sys/class/power_supply/
+battery = BAT0
+adapter = AC0
+
+[module/volume]
+type = internal/alsa
+
+format-volume = <label-volume> <bar-volume>
+label-volume =
+format-muted-prefix =
+label-muted = mute
+bar-volume-width = 10
+bar-volume-indicator = ~
+bar-volume-fill = ─
+bar-volume-empty = ─
+
+[module/filesystem]
+type = internal/fs
+mount-0 = /
+
+[module/wlan]
+type = internal/network
+interface = wlp3s0
+format-connected-padding = 1
+format-disconnected-padding = 1
+format-connected = <label-connected>
+label-connected = %essid%
+
+[module/formating]
+type = custom/script
+interval = 1.0
+exec = echo $(date +%H:%M:%S)
+
+[module/keyboard]
+type = internal/xkeyboard
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
+strip-wsnumbers = false
+enable-click = false
+enable-scroll = false
+
+label-mode-foreground = #00000000
+label-mode-background = #00000000
+
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-foreground =  #002b36
+label-focused-background = #839496
+label-focused-underline =
+label-focused-padding = 1
+
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = ${self.label-focused-padding}
+label-unfocused-foreground = ${colors.foreground-alt}
+label-unfocused-background = ${colors.background-alt}
