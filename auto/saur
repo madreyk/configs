@@ -1,0 +1,13 @@
+#!/bin/sh
+
+if [ -z $1 ]; then
+	echo "Using: \"saur [aur pkg]\""
+else
+	cdd=$(pwd)
+	cd /tmp
+	git clone https://aur.archlinux.org/$1.git
+	cd /tmp/$1
+	makepkg -si
+	cd $cdd
+	sudo rm -r /tmp/$1
+fi

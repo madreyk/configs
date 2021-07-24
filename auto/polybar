@@ -1,0 +1,4 @@
+#!/bin/dash
+
+killall polybar
+polybar top

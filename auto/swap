@@ -1,0 +1,14 @@
+#!/bin/sh
+
+if [ -z $1 ]; then
+	echo "To swap 2 files: \"swap [1st file] [2nd file]\""
+else
+	if [ -z $2 ]; then
+		echo "Please, type 2nd file"
+	else
+		mkdir ~/.local/swap
+		mv $1 ~/.local/swap
+		mv $2 $1
+		mv ~/.local/swap/$1 $2
+	fi
+fi

@@ -1,0 +1,3 @@
+#!/bin/dash
+
+chromium "translate.yandex.ru/?text=$(xclip -o)"

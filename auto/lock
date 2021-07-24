@@ -1,0 +1,8 @@
+#!/bin/dash
+
+import -window root ~/.sc1010101010.png
+convert ~/.sc1010101010.png -blur 0x8 ~/.sc1010101010.png
+setxkbmap us
+i3lock -i ~/.sc1010101010.png -ef
+i3-msg restart
+rm ~/.sc1010101010.png

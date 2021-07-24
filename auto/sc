@@ -1,0 +1,11 @@
+#!/bin/dash
+
+if [ $1 = -s ]; then
+        fp=~/pc/sc/$( date "+%Y-%m-%d_%H-%M-%S" )_sc.png
+        import ${fp}
+        xclip -selection clipboard -target image/png -i < ${fp}
+else
+        fp=~/pc/sc/$( date "+%Y-%m-%d_%H-%M-%S" )_sc.png
+        import -window root ${fp}
+        xclip -selection clipboard -target image/png -i < ${fp}
+fi

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+out=$(rofi -dmenu -p "browse")
+if [ -z $(echo $out | grep "https://") ]; then
+	chromium "https://searx.info/search?q=$out"
+else
+	chromium "$out"
+fi
