@@ -8,7 +8,6 @@ imap <C-h> <C-w>
 set backspace=indent,eol,start
 set clipboard=unnamedplus
 syntax on
-set expandtab
 set number
 set tabstop=4
 set mouse=a
