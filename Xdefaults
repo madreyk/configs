@@ -1,5 +1,5 @@
 URxvt.scrollBar: false
-URxvt*font: xft:DejaVu Sans Mono:size=14
+URxvt*font: xft:Monospace:size=14
 URxvt.letterSpace: -2.5
 ! Background color
 URxvt.background:   #002b36
