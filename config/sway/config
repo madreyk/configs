@@ -17,6 +17,21 @@ workspace_auto_back_and_forth no
 force_display_urgency_hint 100ms
 focus_on_window_activation none
 show_marks no
+input "type:touchpad" {
+    left_handed enabled
+    tap enabled
+    natural_scroll disabled
+    dwt enabled
+    accel_profile "flat"
+    pointer_accel 0.5
+}
+input "type:keyboard" {
+	xkb_layout us,ru
+	xkb_options grp:alt_shift_toggle
+	repeat_delay 250
+	repeat_rate 30
+}
+
 
 # Variables
 set $ws1 "1"
@@ -33,21 +48,20 @@ bindsym $m+d floating toggle
 bindsym Mod1+Tab focus mode_toggle
 bindsym $m+Shift+a move scratchpad
 bindsym $m+a scratchpad show
-bindcode 121 amixer -c 0 set Master toggle
-bindcode 122 amixer -c 0 set Master 10%-
-bindcode 123 amixer -c 0 set Master 10%+
+#bindcode 121 amixer -c 0 set Master toggle
+#bindcode 122 amixer -c 0 set Master 10%-
+#bindcode 123 amixer -c 0 set Master 10%+
 bindsym $m+z exec rofi -show run
 bindsym $m+Shift+z exec ~/.auto/rofi
 bindsym $m+x exec $tm
-bindsym $m+Ctrl+Shift+r restart
+bindsym $m+Ctrl+Shift+r reload
 bindsym $m+c fullscreen toggle
 bindsym Print exec ~/.auto/sc -s
 bindsym Ctrl+Print exec ~/.auto/sc
 bindsym Mod1+Escape exec ~/.auto/lock
 
+
 # Launcher
-exec_always setxkbmap "us,ru" "winkeys" "grp:alt_shift_toggle,grp_led:scroll"
-exec_always killall polybar; exec polybar top
 bindsym $m+s mode apps
 mode apps {
 	bindsym Escape mode default
@@ -99,8 +113,8 @@ bindsym $m+Shift+Left move left
 bindsym $m+Shift+Down move down
 bindsym $m+Shift+Up move up
 bindsym $m+Shift+Right move right
-bindsym $m+v split v
-bindsym $m+Shift+v split h
+bindsym $m+v split h
+bindsym $m+Shift+v split v
 bindsym $m+1 workspace number $ws1
 bindsym $m+2 workspace number $ws2
 bindsym $m+3 workspace number $ws3
@@ -116,7 +130,7 @@ bindsym KP_Down        resize grow height 2 px or 2 ppt
 bindsym KP_Up          resize shrink height 2 px or 2 ppt
 bindsym KP_Right       resize grow width 2 px or 2 ppt
 client.focused          #839496 #839496 #839496 #000000 #839496
-client.focused_inactive #839496 #839496 #839496 #000000 #839496
+client.focused_inactive #000000 #000000 #000000 #839496 #000000
 client.unfocused        #000000 #000000 #000000 #839496 #000000
 client.urgent           #333333 #333333 #333333 #839496 #333333
 client.background       #002b36
